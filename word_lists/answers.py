@@ -1,4 +1,26 @@
-["cigar",
+def get_answers(scrambled=True):
+    answers = answers_list
+    if scrambled:
+        answers = scramble(answers)
+
+    return answers
+
+
+def scramble(word_list):
+    # we're doing a fake scramble so we can test a consistent word list
+    scrambled = []
+
+    while len(word_list) > 0:
+        if len(word_list) > 5:
+            scrambled.append(word_list[5])
+            word_list.remove(word_list[5])
+        else:
+            scrambled.append(word_list[0])
+            word_list.remove(word_list[0])
+
+    return scrambled
+
+answers_list = ["cigar",
 "rebut",
 "sissy",
 "humph",
@@ -2307,3 +2329,5 @@
 "artsy",
 "rural",
 "shave"]
+
+

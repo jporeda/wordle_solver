@@ -1,4 +1,14 @@
-["aahed",
+import word_lists.answers
+
+
+def get_guesses(scrambled=True):
+    answers = word_lists.answers.get_answers(scrambled)
+    guesses = guess_list + answers
+
+    return guesses
+
+
+guess_list = ["aahed",
 "aalii",
 "aargh",
 "aarti",
