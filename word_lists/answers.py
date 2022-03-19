@@ -1,5 +1,5 @@
 def get_answers(scrambled=True):
-    answers = answers_list
+    answers = answers_list.copy()
     if scrambled:
         answers = scramble(answers)
 

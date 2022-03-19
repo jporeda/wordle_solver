@@ -3,8 +3,7 @@ import word_lists.answers
 
 def get_guesses(scrambled=True):
     answers = word_lists.answers.get_answers(scrambled)
-    guesses = guess_list + answers
-
+    guesses = guess_list.copy() + answers
     return guesses
 
 

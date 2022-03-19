@@ -6,9 +6,8 @@ import next_guess
 
 
 def main_loop():
-    answer_list = word_lists.answers.get_answers()
+    answer_list = word_lists.answers.get_answers(scrambled=False)
     guess_list = word_lists.guesses.get_guesses()
-
     total_count = 0
     failed_puzzles = []
     failed_words = []
