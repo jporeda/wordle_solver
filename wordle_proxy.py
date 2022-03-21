@@ -1,5 +1,10 @@
+from word_lists import guesses
+
+
 def validate(word, puzzle, answers):
     # words = get_words(answers_only=True)
+    if word not in guesses.get_guesses():
+        return "not a word"
     words = answers
     answer = words[puzzle]
     letters = list(word.lower())

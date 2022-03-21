@@ -56,12 +56,7 @@ def remove_duplicate_letters(word):
 
 
 def select_next_guess(words, guess):
-    next_guess = None
-    five_new = []
-    four_new = []
-    three_new = []
-    two_new = []
-    one_new = []
+    ranked_words = []
 
     for word in words:
         de_duped_word = remove_duplicate_letters(word)
@@ -69,60 +64,52 @@ def select_next_guess(words, guess):
         for letter in de_duped_word:
             if letter in guess.guessed_letters:
                 new_letters = new_letters - 1
-        if new_letters == 5:
-            five_new.append(word)
-        elif new_letters == 4:
-            four_new.append(word)
-        elif new_letters == 3:
-            three_new.append(word)
-        elif new_letters == 2:
-            two_new.append(word)
-        else:
-            one_new.append(word)
+        ranked_words.append((word, new_letters))
+    next_guess = find_best_option_in_next_guess(ranked_words)
 
-    if len(five_new) > 0:
-        next_guess = find_best_option_in_next_guess(five_new)
-    elif len(four_new) > 0:
-        next_guess = find_best_option_in_next_guess(four_new)
-    elif len(three_new) > 0:
-        next_guess = find_best_option_in_next_guess(three_new)
-    elif len(two_new) > 0:
-        next_guess = find_best_option_in_next_guess(two_new)
-    else:
-        next_guess = find_best_option_in_next_guess(one_new)
     return next_guess
 
 
-def find_best_option_in_next_guess(guess_list):
-    for word in guess_list:
-        if word[-2:] == "er":
-            return word
-    for word in guess_list:
-        if "ud" in list(word):
-            return word
-    for word in guess_list:
-        if "u" in list(word):
-            return word
-    for word in guess_list:
-        if "un" in list(word):
-            return word
-    for word in guess_list:
-        if "a" in word:
-            return word
-    for word in guess_list:
-        if "un" in list(word):
-            return word
-    for word in guess_list:
-        if "ou" in list(word):
-            return word
-    for word in guess_list:
-        if "r" in list(word):
-            return word
-    for word in guess_list:
-        if "a" in list(word):
-            return word
-    for word in guess_list:
-        if "y" in list(word):
-            return word
+def list_sort_helper(word_with_rank):
+    return word_with_rank[1]
 
-    return guess_list[0]
+
+def find_best_option_in_next_guess(guess_list):
+    guess_list.sort(key=list_sort_helper, reverse=True)
+
+
+    for word in guess_list:
+        if word[0][-2:] == "er":
+            return word[0]
+    for word in guess_list:
+        if "r" in list(word[0]):
+            return word[0]
+    for word in guess_list:
+        if "ud" in list(word[0]):
+            return word[0]
+    for word in guess_list:
+        if "u" in list(word[0]):
+            return word[0]
+    # for word in guess_list:
+    #     if "un" in list(word):
+    #         return word
+    # for word in guess_list:
+    #     if "a" in word:
+    #         return word
+    # for word in guess_list:
+    #     if "un" in list(word):
+    #         return word
+    # for word in guess_list:
+    #     if "ou" in list(word):
+    #         return word
+    # for word in guess_list:
+    #     if "r" in list(word):
+    #         return word
+    # for word in guess_list:
+    #     if "a" in list(word):
+    #         return word
+    # for word in guess_list:
+    #     if "y" in list(word):
+    #         return word
+
+    return guess_list[0][0]
